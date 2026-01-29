@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aditya Shinde | Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>Aditya Shinde</h1>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="Aditya_Resume.pdf" download>Download CV</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero" data-aos="fade-up">
+    <img src="assets/aditya.jpg" alt="Aditya Shinde" class="profile-pic">
+    <div class="hero-text">
+      <h2>Hello, I'm <span class="typewrite" data-period="2000" data-type='["Aditya Shinde", "Software Engineer", "Web & App Developer", "Full-Stack Coder", "IoT Innovator"]'><span class="wrap"></span></span></h2>
+      <p>Turning ideas into intelligent digital solutions.</p>
+      <a href="projects.html" class="btn">Explore My Work</a>
+    </div>
+  </section>
+
+  <section id="summary" data-aos="fade-up">
+    <h2>About Me</h2>
+    <p>
+      I’m Aditya Shinde — a curious and creative software engineer currently pursuing B.Tech in Computer Science from Sanjivani University. With a diploma in Information Technology, I’ve already gained real-world development experience through internships and national-level competitions.
+    </p>
+    <p>
+      I specialize in full-stack development and mobile app building. My toolkit includes Java, JavaScript, React, Node.js, PHP, MySQL, MongoDB, Android, and IoT technologies. I'm also a passionate problem solver with 100+ questions solved on LeetCode and certifications from Oracle, Accenture, and GeeksforGeeks.
+    </p>
+  </section>
+
+  <section id="highlights" data-aos="fade-up">
+    <h2>Career Highlights</h2>
+    <ul class="highlight-list">
+      <li>🏆 Winner – DIPEX Hackathon, COEP, and National Tech Events</li>
+      <li>💼 Internship @ Calibers Infotech – Real-time project experience in HTML, CSS, JS, XAMPP</li>
+      <li>📜 Certified in Java (Oracle), AI & EDA (Accenture), PHP, MongoDB</li>
+      <li>🧠 Solved 100+ DSA problems on LeetCode | 5⭐ Java on HackerRank</li>
+      <li>👨‍💻 Projects featured smart automation, API integration, and cloud-based systems</li>
+    </ul>
+  </section>
+
+  <section id="features" data-aos="fade-up">
+    <h2>What I Offer</h2>
+    <div class="cards">
+      <div class="card"><h3>Frontend Development</h3><p>Interactive UIs using HTML, CSS, JavaScript, and modern frameworks like React.</p></div>
+      <div class="card"><h3>Backend & APIs</h3><p>Robust backend logic using Node.js, PHP, REST APIs, and secure database management.</p></div>
+      <div class="card"><h3>Android & Mobile Apps</h3><p>Native mobile apps built using Java & Android Studio integrated with real-time DBs.</p></div>
+      <div class="card"><h3>IoT & Automation</h3><p>Innovative systems like anti-theft flooring, smart pill dispensers, and sensors with alert modules.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Aditya Shinde | <a href="mailto:adityashinde2311@gmail.com">adityashinde2311@gmail.com</a></p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init();
+
+    var TxtType = function(el, toRotate, period) {
+      this.toRotate = toRotate;
+      this.el = el;
+      this.loopNum = 0;
+      this.period = parseInt(period, 10) || 2000;
+      this.txt = '';
+      this.tick();
+      this.isDeleting = false;
+    };
+
+    TxtType.prototype.tick = function() {
+      var i = this.loopNum % this.toRotate.length;
+      var fullTxt = this.toRotate[i];
+
+      this.txt = this.isDeleting ? fullTxt.substring(0, this.txt.length - 1)
+                                 : fullTxt.substring(0, this.txt.length + 1);
+
+      this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
+
+      var that = this;
+      var delta = 200 - Math.random() * 100;
+      if (this.isDeleting) { delta /= 2; }
+
+      if (!this.isDeleting && this.txt === fullTxt) {
+        delta = this.period;
+        this.isDeleting = true;
+      } else if (this.isDeleting && this.txt === '') {
+        this.isDeleting = false;
+        this.loopNum++;
+        delta = 500;
+      }
+
+      setTimeout(function() { that.tick(); }, delta);
+    };
+
+    window.onload = function() {
+      const elements = document.getElementsByClassName('typewrite');
+      for (let i = 0; i < elements.length; i++) {
+        const toRotate = elements[i].getAttribute('data-type');
+        const period = elements[i].getAttribute('data-period');
+        if (toRotate) {
+          new TxtType(elements[i], JSON.parse(toRotate), period);
+        }
+      }
+    };
+  </script>
+  <style>
+    .typewrite > .wrap {
+      border-right: 0.08em solid #00ffff;
+    }
+  </style>
+</body>
+</html>
